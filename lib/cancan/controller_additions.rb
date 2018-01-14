@@ -294,7 +294,9 @@ module CanCan
 
     def self.included(base)
       base.extend ClassMethods
-      base.helper_method :can?, :cannot?, :current_ability
+      if base.respond_to?(:helper_method)
+        base.helper_method :can?, :cannot?, :current_ability
+      end
     end
 
     # Raises a CanCan::AccessDenied exception if the current_ability cannot
